@@ -25,7 +25,7 @@ public class StartApp1 {
 		//Execute the query
 		
 		//Inserting the values
-		String sql = "Insert into BankInfo(Cid, UName, AccNo, UCity) VALUES (105, 'Bopal', '40098', 'HYD')  ";
+		String sql = "Insert into BankInfo(Cid, UName) VALUES (105, 'Bopal', '40098', 'HYD')  ";
 		
 		int rowAffected = statement.executeUpdate(sql);
 		

@@ -9,10 +9,15 @@ public class LaunchClassForNameEx {
 
 	public static void main(String[] args) {
 		
+		int ids[] = {109,110};
+		String name[] = {"Santosh", "Sriram"};
+		String city[] = {"PUN", "BLR"};
+		int AccNo[] = {55055, 55077};
+		
 		try {
 		Records rec = new Records();
-//		rec.insertRecord(106, "Banu", "BLR", 50089);
-		rec.updateRecord(104);
+		rec.insertRecord(ids, name, city, AccNo);
+//		rec.updateRecord(104);
 //		rec.deleteRecord(106);
 		rec.showRecords();
 		}
@@ -50,15 +55,21 @@ class Records{
 			
 	}
 	
-	public void insertRecord(int id, String name,String city, int AccNo) throws SQLException {
+	public void insertRecord(int id[], String name[],String city[], int AccNo[]) throws SQLException {
+		
+		int n = id.length;
+		int insertedRecords = 0 ;
+		for(int i=0;i<n;i++) {
 		String insertQuery = "Insert Into bankinfo(cid, Uname, UCity, AccNo) VALUES (?,?,?,?) ";
 		preparedStatement = connection.prepareStatement(insertQuery);
-		preparedStatement.setInt(1, id);
-		preparedStatement.setString(2, name);
-		preparedStatement.setString(3, city);
-		preparedStatement.setInt(4, AccNo);
+		preparedStatement.setInt(1, id[i]);
+		preparedStatement.setString(2, name[i]);
+		preparedStatement.setString(3, city[i]);
+		preparedStatement.setInt(4, AccNo[i]);
 		
-		int insertedRecords = preparedStatement.executeUpdate();
+		preparedStatement.executeUpdate();
+		insertedRecords++;
+		}
 		System.out.println("Inserted Records: "+ insertedRecords);
 		
 	}
@@ -76,6 +87,8 @@ class Records{
 	
 	
 	public void updateRecord(int id) {
+		
+		
 		
 		try {
 		String sql1 = "UPDATE BankInfo set UCity = 'BLR' where cid = ? ";
